@@ -1,0 +1,198 @@
+"""
+
+Example: Tic-Tac-Toe model.
+
+
+
+This example models the Tic-Tac-Toe game usually played on paper. The default
+
+script runs a simple example with a few moves and prints the model state to
+
+console.
+
+
+
+@author: Paul T. Grogan <pgrogan@stevens.edu>
+
+"""
+
+
+class TicTacToe:
+    """Represents a Tic-Tac-Toe game.
+
+
+
+    Attributes:
+
+        state (str[][]): the symbol state in a 3x3 grid.
+
+    """
+
+    def __init__(self):
+
+        """Initializes a new Tic-Tac-Toe game."""
+
+        # state is a two-dimensional (3x3) array of spaces which will be
+
+        # filled with "X" and "O" strings to mark progress during the game
+
+        self.state = [[" ", " ", " "], [" ", " ", " "], [" ", " ", " "]]
+
+    def mark(self, row, col, symbol):
+
+        """Marks a symbol at a row and column.
+
+
+
+        Args:
+
+            row (int): the row number (0-based index).
+
+            col (int): the column number (0-based index).
+
+            symbol (str): the symbol to mark (usually X or O).
+
+        1,
+
+        Returns:
+
+            True if the mark was valid, False otherwise.
+
+        """
+
+        # check if current value at row/column is blank
+
+        if self.state[row][col] == " ":
+
+            # assign new symbol and return True
+
+            self.state[row][col] = symbol
+
+            return True
+
+        else:
+
+            # otherwise return False
+
+            return False
+
+    def print_state(self):
+
+        """Prints the current game state to console."""
+
+        # iterate over each row in state
+
+        for row in self.state:
+
+            # print each row entry seperated by a vertical brace (|)
+
+            print "|".join(row)
+
+            # print horizontal braces if row is not the last (index -1)
+
+            if row is not self.state[-1]:
+                print "------"
+
+        # print a blank line at the end
+
+        print ""
+
+    def get_winner(self):
+
+        """Gets the winning symbol (if any)."""
+        winner = "None"
+
+        for row in range(3):
+            if self.state[row][0] == self.state[row][1] == self.state[row][2]:
+                winner = self.state[row][1]
+
+        for col in range(3):
+            if self.state[0][col] == self.state[1][col] == self.state[2][col]:
+                winner = self.state[1][col]
+
+        if self.state[0][0] == self.state[1][1] ==self.state[2][2]:
+            winner = self.state[1][1]
+
+        if self.state[0][2] == self.state[1][1] ==self.state[2][0]:
+            winner = self.state[1][1]
+
+        return winner
+
+        """Returns:
+
+            winner (str): the winning symbol, otherwise None if no winner.
+
+        """
+
+        # TODO complete for homework question 1-3(c)
+
+    def is_tie(self):
+
+        """Checks if this is a tie game."""
+        istie = 1
+
+        for row in range(3):
+            if self.state[row][0] == self.state[row][1] == self.state[row][2]:
+                istie = 0
+
+        for col in range(3):
+            if self.state[0][col] == self.state[1][col] == self.state[2][col]:
+                istie = 0
+
+        if self.state[0][0] == self.state[1][1] ==self.state[2][2]:
+            istie = 0
+
+        if self.state[0][2] == self.state[1][1] ==self.state[2][0]:
+            istie = 0
+
+        if istie == 1:
+            print "This is a tie"
+            return True
+        else:
+            return False
+
+        """Returns:
+
+            is_tie (bool): True if this is a tie, False otherwise.
+
+        """
+
+        # TODO complete for homework question 1-3(d)
+
+
+if __name__ == "__main__":
+    # instantiate a new game
+
+    ttt = TicTacToe()
+
+    # mark X in row 1, column 1
+
+    ttt.mark(1, 1, "X")
+
+    # print the state
+
+    ttt.print_state()
+
+    # mark O in row 0, column 2
+
+    ttt.mark(0, 2, "O")
+
+    # print the state
+
+    ttt.print_state()
+
+    # mark X in row 0, column 0
+
+    ttt.mark(0, 0, "X")
+
+    # print the state
+
+    ttt.print_state()
+
+    # mark O in row 2, column 2
+
+    ttt.mark(2, 2, "O")
+
+    # print the state
+
+    ttt.print_state()
